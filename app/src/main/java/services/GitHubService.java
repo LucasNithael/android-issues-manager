@@ -18,6 +18,7 @@ public class GitHubService {
 
     private static final String GITHUB_TOKEN = "";
     private static final String BASE_URL = "https://api.github.com/users/lucasnithael";
+    private static final String BASE_URL2 = "https://api.github.com/repos/lucasnithael/";
 
     public interface RepositoryCallback {
         void onSuccess(List<Repositorio> repositorios);
@@ -94,7 +95,7 @@ public class GitHubService {
             protected List<String> doInBackground(Void... voids) {
                 List<String> issues = new ArrayList<>();
                 try {
-                    URL url = new URL(BASE_URL + "/repos/" + repoName + "/issues");
+                    URL url = new URL(BASE_URL2 + repoName + "/issues");
                     HttpURLConnection conn = (HttpURLConnection) url.openConnection();
                     conn.setRequestMethod("GET");
                     conn.setRequestProperty("Accept", "application/vnd.github.v3+json");
