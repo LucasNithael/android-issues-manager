@@ -24,6 +24,11 @@ public class GitHubService {
         void onError(String error);
     }
 
+    public interface IssuesCallback {
+        void onSuccess(List<String> issues);
+        void onError(String error);
+    }
+
     public void obterRepositorios(RepositoryCallback callback) {
         new AsyncTask<Void, Void, List<Repositorio>>() {
             @Override
@@ -78,6 +83,64 @@ public class GitHubService {
                     callback.onSuccess(repositorios);
                 } else {
                     callback.onError("Erro ao obter repositórios");
+                }
+            }
+        }.execute();
+    }
+
+    public void obterIssues(String repoName, IssuesCallback callback) {
+        new AsyncTask<Void, Void, List<String>>() {
+            @Override
+            protected List<String> doInBackground(Void... voids) {
+                List<String> issues = new ArrayList<>();
+                try {
+                    URL url = new URL(BASE_URL + "/repos/" + repoName + "/issues");
+                    HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+                    conn.setRequestMethod("GET");
+                    conn.setRequestProperty("Accept", "application/vnd.github.v3+json");
+                    conn.setRequestProperty("Authorization", "token " + GITHUB_TOKEN);
+
+                    Log.d("GitHubService", "Enviando requisição para: " + url.toString());
+
+                    if (conn.getResponseCode() != 200) {
+                        throw new RuntimeException("Erro: HTTP código " + conn.getResponseCode());
+                    }
+
+                    // Lendo a resposta da API
+                    BufferedReader br = new BufferedReader(new InputStreamReader((conn.getInputStream())));
+                    StringBuilder output = new StringBuilder();
+                    String line;
+                    while ((line = br.readLine()) != null) {
+                        output.append(line);
+                    }
+                    conn.disconnect();
+
+                    Log.d("GitHubService", "Resposta da API: " + output.toString());
+
+                    // Convertendo a resposta para JSON
+                    JSONArray jsonArray = new JSONArray(output.toString());
+
+                    // Iterando sobre as issues
+                    for (int i = 0; i < jsonArray.length(); i++) {
+                        JSONObject issueJson = jsonArray.getJSONObject(i);
+                        String titulo = issueJson.getString("title");
+
+                        // Adicionando a issue à lista
+                        issues.add(titulo);
+                    }
+                } catch (Exception e) {
+                    Log.e("GitHubService", "Erro ao obter issues", e);
+                    return null;
+                }
+                return issues;
+            }
+
+            @Override
+            protected void onPostExecute(List<String> issues) {
+                if (issues != null) {
+                    callback.onSuccess(issues);
+                } else {
+                    callback.onError("Erro ao obter issues");
                 }
             }
         }.execute();

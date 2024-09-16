@@ -8,14 +8,14 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
 
-import adapters.RepositoryAdapter;
+import adapters.RepositorioAdapter;
 import models.Repositorio;
 import services.GitHubService;
 
 public class MainActivity extends AppCompatActivity {
 
     private RecyclerView recyclerView;
-    private RepositoryAdapter repositoryAdapter;
+    private RepositorioAdapter repositoryAdapter;
     private List<Repositorio> repositoriosLista;
 
     @Override
@@ -32,7 +32,7 @@ public class MainActivity extends AppCompatActivity {
             public void onSuccess(List<Repositorio> repositorios) {
                 repositoriosLista = repositorios;
                 Log.d("MainActivity", "Número de repositórios obtidos: " + repositoriosLista.size());
-                repositoryAdapter = new RepositoryAdapter(repositoriosLista);
+                repositoryAdapter = new RepositorioAdapter(repositoriosLista, MainActivity.this);
                 recyclerView.setAdapter(repositoryAdapter);
             }
 
