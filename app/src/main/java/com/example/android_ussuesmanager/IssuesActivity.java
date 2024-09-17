@@ -1,7 +1,10 @@
 package com.example.android_ussuesmanager;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -24,6 +27,18 @@ public class IssuesActivity extends AppCompatActivity {
 
         recyclerView = findViewById(R.id.recyclerViewIssues);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
+
+        // Adicionando o botão para cadastrar uma nova issue
+        Button btnAddIssue = findViewById(R.id.btnAddIssue);
+        btnAddIssue.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Inicia a Activity de cadastro de issue
+                Intent intent = new Intent(IssuesActivity.this, CadastrarIssueActivity.class);
+                intent.putExtra("repoName", getIntent().getStringExtra("repoName")); // Passa o nome do repositório
+                startActivity(intent);
+            }
+        });
 
         String repoName = getIntent().getStringExtra("repoName");
 

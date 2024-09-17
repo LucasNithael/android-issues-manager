@@ -1,0 +1,42 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <TextView
+        android:id="@+id/tvCadastrarIssueTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Cadastrar Nova Issue"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:layout_gravity="center_horizontal"
+        android:paddingBottom="16dp" />
+
+    <EditText
+        android:id="@+id/etTituloIssue"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Título da Issue"
+        android:padding="8dp"
+        android:layout_marginBottom="16dp" />
+
+    <EditText
+        android:id="@+id/etDescricaoIssue"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Descrição da Issue"
+        android:minLines="4"
+        android:padding="8dp"
+        android:gravity="top"
+        android:layout_marginBottom="16dp" />
+
+    <Button
+        android:id="@+id/btnCriarIssue"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Criar Issue"
+        android:padding="12dp"
+        android:layout_marginTop="16dp" />
+</LinearLayout>

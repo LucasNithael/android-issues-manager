@@ -14,7 +14,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Androidussuesmanager"
         tools:targetApi="31">
-
+        <activity
+            android:name=".CadastrarIssueActivity"
+            android:exported="false" />
         <activity
             android:name=".IssuesActivity"
             android:exported="false" />

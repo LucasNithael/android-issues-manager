@@ -14,6 +14,16 @@
         android:layout_gravity="center_horizontal"
         android:paddingBottom="16dp" />
 
+    <!-- Botão para ir à Activity de cadastro de issues -->
+    <Button
+        android:id="@+id/btnAddIssue"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Cadastrar Issue"
+        android:layout_gravity="center_horizontal"
+        android:padding="8dp"
+        android:layout_marginBottom="16dp" />
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerViewIssues"
         android:layout_width="match_parent"
