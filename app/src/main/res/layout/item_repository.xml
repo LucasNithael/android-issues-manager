@@ -3,7 +3,9 @@
     android:layout_height="wrap_content"
     android:orientation="vertical"
     android:padding="16dp"
-    android:background="?android:attr/selectableItemBackground">
+    android:layout_margin="8dp"
+    android:background="@drawable/rounded_background">
+
 
     <TextView
         android:id="@+id/tvRepoName"
@@ -12,13 +14,17 @@
         android:text="Nome do Repositório"
         android:textSize="18sp"
         android:textStyle="bold"
-        android:paddingBottom="4dp" />
+        android:paddingBottom="4dp"
+        android:layout_gravity="center_horizontal"
+        android:textColor="@android:color/black"/>
 
     <TextView
         android:id="@+id/tvRepoDescription"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Descrição do Repositório"
-        android:textSize="14sp" />
+        android:textSize="14sp"
+        android:layout_gravity="center_horizontal"
+        android:textColor="@android:color/black"/>
 
 </LinearLayout>
